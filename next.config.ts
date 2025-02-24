@@ -21,8 +21,8 @@ const nextConfig: NextConfig = {
        "business.trustedshops.com",
       "images.tech.co",
       "s.yimg.com",
-      "e1.pxfuel.com",
-    "images.hothardware.com"
+      "media.zigcdn.com",
+    "www.atomos.com"
    ],
   },
 };

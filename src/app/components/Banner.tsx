@@ -1,106 +1,57 @@
-import React from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-
-} from "@/components/ui/carousel";
+"use client";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MoveRight } from "lucide-react";
+import Categorys from "./Categorys";
 
 function Banner() {
-  return (
-    <div className="mx-auto max-w-screen max-h-screen">
-      <Carousel>
-        <CarouselContent>
-          {/************************Shoes banner************************ */}
-          <CarouselItem className="flex items-center md:gap-20 gap-2 flex-col md:flex-row">
-            <Image
-              src="/pexels-adrian-dorobantu-989175-2300334.jpg"
-              width={300}
-              height={300}
-              className=" w-full md:w-[70%] max-h-[91vh] "
-              alt="dp"
-            />
-            <div>
-              <p className="md:text-7xl text-lg font-extrabold text-red-600 rotate-12 ">
-                %20 off <br />
-                <p className="md:text-3xl text-lg animate-pulse ">4 days</p>
-              </p>
-              <div className="bg-green-500 p-2 font-medium rounded-md text-white flex gap-2 w-fit">
-                <Link href="/shop?category=shoes">Go shop </Link>
-                <MoveRight />
-              </div>
-            </div>
-          </CarouselItem>
-          {/************************Clothes banner************************ */}
-          <CarouselItem className="flex items-center md:gap-20 gap-2 flex-col md:flex-row">
-            <Image
-              src="/pexels-bohlemedia-1884581.jpg"
-              width={300}
-              height={300}
-              className="w-full md:w-[70%] max-h-[91vh] "
-              alt="dp"
-            />{" "}
-            <div>
-              <p className="md:text-7xl text-2xl font-extrabold text-red-600 rotate-12 ">
-                %25 off
-                <br />
-                <p className="md:text-3xl text-xl animate-pulse ">9 days</p>
-              </p>
-              <br />
-              <div className="bg-green-500 p-2 font-medium rounded-md text-white flex gap-2 w-fit">
-                <Link href="/shop?category=clothes">Go shop </Link>
-                <MoveRight className="md:text-lg text-sm"/>
-              </div>
-            </div>
-          </CarouselItem>{" "}
-          {/************************Lptop banner************************ */}
-          <CarouselItem className="relative">
-            <Image
-              src="/pexels-buro-millennial-636760-1438081.jpg"
-              width={300}
-              height={300}
-              className="w-full  max-h-[91vh] "
-              alt="dp"
-            />
-            <div className="bg-green-500 p-2 font-medium rounded-md text-white flex gap-2 w-fit absolute bottom-7 left-14">
-              <Link href="/shop?category=laptop">Go shop </Link>
-              <MoveRight />
-            </div>
-          </CarouselItem>
-          {/************************Mobile banner************************ */}
-          <CarouselItem className="relative">
-            <Image
-              src="/pexels-jessbaileydesign-788946.jpg"
-              width={300}
-              height={300}
-              className="w-full max-h-[91vh] "
-              alt="dp"
-            />
-            <div className="bg-green-500 p-2 font-medium rounded-md text-white flex gap-2 w-fit absolute bottom-7 left-14">
-              <Link href="/shop?category=mobile">Go shop </Link>
-              <MoveRight />
-            </div>
-          </CarouselItem>
-          {/************************Laptop banner************************ */}
-          <CarouselItem className="relative">
-            <Image
-              src="/pexels-natri-129208.jpg"
-              width={300}
-              height={300}
-              className="w-full max-h-[91vh] "
-              alt="dp"
-            />
-            <div className="bg-green-500 p-2 font-medium rounded-md text-white flex gap-2 w-fit absolute bottom-7 left-14">
-              <Link href="/shop?category=laptop">Go shop </Link>
-              <MoveRight />
-            </div>
-          </CarouselItem>
-        </CarouselContent>
+  const initialTime = 10 * 24 * 60 * 60 * 1000; // 10 days
+  const [timeRemaining, setTimeRemaining] = useState(initialTime);
 
-      </Carousel>
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setTimeRemaining((prevTime) => {
+        if (prevTime <= 1000) {
+          clearInterval(timerId);
+          return 0;
+        }
+        return prevTime - 1000;
+      });
+    }, 1000);
+
+    return () => clearInterval(timerId);
+  }, []);
+
+  const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+  const hours = Math.floor(
+    (timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
+  const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+  return (
+    <div className="w-full flex flex-col md:gap-8 gap-2 items-center ">
+      <div className="w-full relative">
+        <Image
+          src="/644678047_1375410299_KS-Grocery-Delivery.gif"
+          alt="dp"
+          width={100}
+          height={100}
+          className="w-full max-h-[55vh] "
+        />
+        <Link
+          href="/shop"
+          className=" absolute bg-green-500 p-2 rounded-md text-white font-medium -bottom-5 border-2
+          border-white  right-10"
+        >
+          Shop now
+        </Link>
+      </div>
+
+      <p className="px-1 py-2 rounded-lg bg-green-500 text-red-600 font-bold text-xl md:text-md ">
+        20% off on digital products {days}:{hours}:{minutes}:{seconds}
+      </p>
+
+      <Categorys />
     </div>
   );
 }

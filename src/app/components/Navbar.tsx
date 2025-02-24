@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import { ShoppingCart } from "lucide-react";
 import { House } from "lucide-react";
 import { LogIn } from "lucide-react";
@@ -6,9 +7,19 @@ import { LogOut } from "lucide-react";
 import { ShoppingBasket } from "lucide-react";
 
 function Navbar() {
+  let [scroll , setScroll]=useState(false)
+  useEffect(() => {
+    window.addEventListener("scroll",()=>{
+      if(window.scrollY>100){
+        setScroll(true)
+      }else{
+        setScroll(false)
+      }
+    })
+  },[])
   let loggin = true;
   return (
-    <div className="flex justify-between items-center  text-white px-10 py-4 bg-white dark:bg-black">
+    <div className={`flex justify-between items-center  text-white px-10 py-4 bg-white dark:bg-black ${scroll ? "fixed top-0 left-0 w-full z-50 duration-500 bg-opacity-50 backdrop-blur-sm "  : "bg-transparent"}`}>
       <div>
         <i className="text-green-500 font-medium dark:text-purple-800 ">
           <ShoppingCart />
