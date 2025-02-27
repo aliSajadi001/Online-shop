@@ -1,18 +1,27 @@
 import { Button } from "@/components/ui/button";
 import Banner from "./components/Banner";
 import Product from "./components/(Slider)/Product";
+import Welcome from "./components/Welcome";
+import Digital from "./components/(offs)/Digital";
 
 export default function Home() {
   return (
-    <div className="h-[3000px]">
-      {/***************************Baner************************ */}
+    <div className="">
+      {/***************************Baner************************************************ */}
       <div className="mx-auto">
         <Banner />
       </div>
-
-      {/***************************New product************************ */}
+      {/*************************************Welcome text*********************************/}
+      <div className="my-10">
+        <Welcome />
+      </div>
+      {/***************************New product********************************************/}
       <div>
         <Product />
+      </div>
+      {/***************************Digital product****************************************/}
+      <div className="my-20">
+        <Digital />
       </div>
     </div>
   );

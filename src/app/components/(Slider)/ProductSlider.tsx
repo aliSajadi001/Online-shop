@@ -11,6 +11,8 @@ function ProductSlider({ name, image, price }: ProductSlider) {
                 src={image}
                 alt={name}
                 width={100}
+                quality={100}
+                layout="responsive"
                 height={100}
                 className="w-full h-full"
               />

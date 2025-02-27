@@ -22,7 +22,8 @@ const nextConfig: NextConfig = {
       "images.tech.co",
       "s.yimg.com",
       "media.zigcdn.com",
-    "www.atomos.com"
+    "www.atomos.com",
+    "www.freeiconspng.com"
    ],
   },
 };

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/carousel";
 function Product() {
   return (
-    <div className="w-full flex items-center justify-center flex-col gap-[110px]">
+    <div className="w-full flex items-center justify-center flex-col gap-[110px] mt-10">
       {/***************************************New product****************************** */}
       <div className="w-full flex gap-2 items-center justify-center px-10 space-y-10">
         <div className="flex items-center flex-col">
